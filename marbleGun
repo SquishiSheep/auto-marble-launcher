@@ -1,0 +1,28 @@
+#include <Arduino.h>
+
+#include <ESP32Servo.h>
+#include <ESP32SharpIR.h>
+#include <QTRSensors.h>
+
+#include <Servo.h>
+
+Servo servoGun;
+
+QTRSensors qtr;
+int16_t position = 3500;
+
+float testdist = 100;
+
+ESP32SharpIR straight(ESP32SharpIR::GP2Y0A21YK0F, 25);
+
+void gun(){
+
+    Serial.println(straight.getDistanceFloat());
+    
+    float straight_dist = straight.getDistanceFloat();
+
+    if(straight_dist < testdist){
+        servoGun.write(1600);
+    }
+}
+
